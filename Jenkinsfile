@@ -36,7 +36,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION} -f Dockerfile .
+                docker buildx -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION} -f Dockerfile .
                 """
             }
         }
