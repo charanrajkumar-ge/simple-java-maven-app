@@ -36,7 +36,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh """
-                docker buildx -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION} -f Dockerfile .
+                docker buildx create --use --name mybuilder || true
+                docker buildx inspect --bootstrap
+                docker buildx build --platform linux/amd64 -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION}t -f Dockerfile --load .
+                '''
                 """
             }
         }
