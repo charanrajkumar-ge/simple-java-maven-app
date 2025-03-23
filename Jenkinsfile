@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo.git'
+                git branch: 'master', credentialsId: 'dsad', url: 'https://github.com/charanrajkumar-ge/simple-java-maven-app.git''
             }
         }
         stage('Deploy to Minikube') {
